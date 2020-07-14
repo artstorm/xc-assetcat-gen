@@ -1,0 +1,38 @@
+{
+  "name": "xcode-asset-catalog-generator",
+  "version": "0.0.1",
+  "description": "Xcode asset catalog generator for game development.",
+  "main": "index.js",
+  "scripts": {
+    "check": "npx prettier -c *.js './src/**/*.js'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artstorm/xcode-asset-catalog-generator.git"
+  },
+  "keywords": [
+    "xcode",
+    "asset",
+    "catalog",
+    "gamedev",
+    "game",
+    "development"
+  ],
+  "author": "Johan Steen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/artstorm/xcode-asset-catalog-generator/issues"
+  },
+  "homepage": "https://github.com/artstorm/xcode-asset-catalog-generator#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "sharp": "^0.25.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.0.4"
+  }
+}
