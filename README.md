@@ -1,6 +1,11 @@
-# Xcode Asset Catalog Generator
+# xc assetcat gen
 
-Xcode asset catalog generator for game development. Builds the asset catalog from source image assets. 
+Xcode asset catalog generator for game development. 
+
+[![GitHub Actions](https://github.com/artstorm/xc-assetcat-gen/workflows/style/badge.svg)](https://github.com/artstorm/xc-assetcat-gen/actions)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+
+Builds the asset catalog from source image assets. 
 
 It creates optimized sizes for iPad, iPhone, AppleTV and Mac.
 
