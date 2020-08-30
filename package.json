@@ -1,6 +1,6 @@
 {
   "name": "xcode-asset-catalog-generator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Xcode asset catalog generator for game development.",
   "main": "index.js",
   "scripts": {
