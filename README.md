@@ -12,16 +12,48 @@ Builds the asset catalog from source image assets with optimized sizes for iPad,
 * Specifically targets game development with SpriteKit.
 * Creates sizes in 1x, 2x and 3x per device type.
 * Saves the output directly to the asset catalog in Xcode.
+* Handles numbered image sequences.
 * Handles vector images as Universal, Single Scale. PDF and SVG (Xcode 12+).
 * Tracks converted images so on each re-generation only new or updated source images are re-generated to the asset catalog.
-* In early development, available as-is.
+* In early development, available as-is. The same goes for the documentation.
 * ...
 
 I've developed the tool for personal usage, so everything is subject to change between versions and it does have quite a few rough edges.
 
+## Usage
+
+xc assetcat gen is available on [npm](https://www.npmjs.com/package/xc-assetcat-gen) and requires nodejs.
+
+### Installation 
 
 
 
+Install the tool per project in dedicated folder with:
+
+```sh
+npm install xc-assetcat-gen --save
+```
+
+```json
+{
+  "scripts": {
+    "dev": "node index.js",
+    "prod": "node index.js"
+  },
+  "dependencies": {
+    "xc-assetcat-gen": "0.0.2"
+  }
+}
+```
+
+
+
+
+## Config
+
+
+
+9-1 (or what was the name?) slicing
 
 Run the script:
 
