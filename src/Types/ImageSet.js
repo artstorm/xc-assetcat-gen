@@ -134,8 +134,11 @@ class ImageSet {
 
           // For now, we'll assume that if an image is set to universal that it
           // is vector image, so we'll let Xcode make the resizing and instead
-          // just cop the vector file as-is to the asset catalog.
-          fs.copyFileSync(Config.sourceImagesRoot + this.input.source, `${this.targetFolder.fullPath}/${name}`);
+          // just copy the vector file as-is to the asset catalog.
+          fs.copyFileSync(
+            Config.sourceImagesRoot + this.input.source,
+            `${this.targetFolder.fullPath}/${name}`
+          );
 
           log(`Copied "${name}"`, LogLevel.success);
           this.addToContentsFile(name, Idiom.universal);
