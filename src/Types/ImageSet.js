@@ -5,6 +5,7 @@
  * https://developer.apple.com/library/archive/documentation/Xcode/Reference/xcode_ref-Asset_Catalog_Format/ImageSetType.html#//apple_ref/doc/uid/TP40015170-CH25-SW1
  */
 const sharp = require("sharp");
+const fs = require("fs");
 const ContentsFile = require("../ContentsFile");
 const Config = require("../Config");
 const { Idiom, Scale, LogLevel } = require("../Enums");
@@ -37,8 +38,19 @@ class ImageSet {
     // Make a ContentsFile object.
     this.contentsFile = new ContentsFile(path);
 
+    // Create device specific images.
+    this.createForDevices();
+
+    // Write the contents file.
+    this.contentsFile.write();
+
+    // Update checksum DB.
+    checksum.updateDB();
+  }
+
+  createForDevices() {
     // Build the assets for each device.
-    input.devices.forEach(
+    this.input.devices.forEach(
       function (device) {
         if (device == Idiom.iPad) {
           // We don't use 1x for iPad, so we just make an empty entry for it.
@@ -116,14 +128,20 @@ class ImageSet {
           );
           this.addToContentsFile(name, Idiom.tv, Scale["2x"]);
         }
+
+        if (device == Idiom.universal) {
+          let name = `${this.input.name}.${this.input.format}`;
+
+          // For now, we'll assume that if an image is set to universal that it
+          // is vector image, so we'll let Xcode make the resizing and instead
+          // just cop the vector file as-is to the asset catalog.
+          fs.copyFileSync(Config.sourceImagesRoot + this.input.source, `${this.targetFolder.fullPath}/${name}`);
+
+          log(`Copied "${name}"`, LogLevel.success);
+          this.addToContentsFile(name, Idiom.universal);
+        }
       }.bind(this)
     );
-
-    // Write the contents file.
-    this.contentsFile.write();
-
-    // Update checksum DB.
-    checksum.updateDB();
   }
 
   createResizedImage(name, width, height) {
@@ -143,7 +161,7 @@ class ImageSet {
       })
       .then((data) => {
         data
-          .resize(width, height)
+          .resize(width, height, { fit: sharp.fit.outside })
           .toFile(`${this.targetFolder.fullPath}/${name}`, (err, info) => {
             if (err) {
               log(err, LogLevel.error);
@@ -157,8 +175,11 @@ class ImageSet {
   addToContentsFile(name, idiom, scale) {
     let content = {
       idiom: idiom.description,
-      scale: scale.description,
     };
+
+    if (scale != null) {
+      content.scale = scale.description;
+    }
 
     if (name != null) {
       content.filename = name;

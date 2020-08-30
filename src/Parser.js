@@ -17,7 +17,7 @@ class Parser {
   }
 
   parse() {
-    this.assets.forEach(function (asset) {
+    this.assets.forEach((asset) => {
       switch (asset.type) {
         // Asset Catalog Types.
         case Type.ImageSet:
@@ -35,7 +35,7 @@ class Parser {
           new Level(asset);
           break;
         default:
-          throw new Error(`Type not implemented.`);
+          throw new Error(`Type ${String(asset.type)} not implemented.`);
       }
     });
   }

@@ -3,6 +3,7 @@ const Idiom = Object.freeze({
   iPad: Symbol("ipad"),
   mac: Symbol("mac"),
   tv: Symbol("tv"),
+  universal: Symbol("universal"),
 });
 
 const Scale = Object.freeze({
