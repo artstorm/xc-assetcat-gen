@@ -48,11 +48,27 @@ And then install the generator:
 npm install
 ```
 
+In the installation folder, also add an `index.js` file with this content:
+
+```js
+const config = require("./config");
+const Generator = require("xc-assetcat-gen");
+
+this.config = {
+  source_images_root: config.source_images_root,
+  asset_catalog_root: config.asset_catalog_root,
+  author: config.author
+};
+
+const parser = new Generator.Parser(config.assets);
+parser.parse();
+````
+
 ## Config
 
 In the tool's installation folder, create a `config.js` file with this content:
 
-```
+```js
 const { Enums } = require("xc-assetcat-gen");
 
 // Enums
@@ -76,6 +92,86 @@ module.exports = {
 
 Then fill the `assets` array with the generation specification from the source art.
 
+### ImageSet
+
+Generate from a single image.
+
+```js
+{
+  name: "HUD",
+  source: "/Output/HUD/hud.png",
+  target: "UI/HUD",
+  size: { width: 351, height: 36 },
+  format: "png",
+  type: Type.ImageSet,
+  devices: [Idiom.iPhone, Idiom.iPad, Idiom.mac, Idiom.tv]
+}
+```
+
+* name: The name the asset will get in the asset catalog.
+* source: Relative path to the source file.
+* target: The path of folders to generate to the asset in the asset catalog.
+* size: The size final size of the asset in points.
+* format: The file format of the generated versions of the asset.
+* type: Lets the generator now it's a single ImageSet.
+* devices: The devices to generate the asset for.
+
+### Image Sequence
+
+Generate from an image sequence.
+
+```js
+{
+  name: "Drone",
+  source: "/Output/Drone/drone_##.png",
+  target: "Drone",
+  actions: [
+    { name: "Jump", start: 0, end: 30 },
+    { name: "Run", start: 31, end: 48 }
+  ],
+  size: { width: 100, height: 100 },
+  format: "png",
+  type: Type.Sequence,
+  devices: [Idiom.iPhone, Idiom.iPad, Idiom.mac, Idiom.tv]
+}
+```
+
+* name: The base name the sequence will get in the Xcode asset catalog.
+* source: Relative path to the source file. `##` should match the number of digits used for the sequence.
+* actions: Allows splitting the sequence into different actions, by setting start and end frame for each action. `name` will be used as a suffix before the number in the asset catalog.
+* target: The path to generate to the asset in the asset catalog.
+* size: The size final size of the asset in points.
+* format: The file format of the generated versions of the asset.
+* type: Lets the generator now it's a sequence.
+* devices: The devices to generate the assets for.
+
+### Sprite Atlas
+
+Group multiple imagesets and/or sequences to a Sprite Atlas.
+
+```js
+{
+  name: "Drone Sprite Atlas",
+  target: "Enemies",
+  type: Type.SpriteAtlas,
+  assets: [
+  ]
+}
+
+```
+
+* name: The name of the Sprite Atlas in the Xcode Asset Catalog.
+* target: The path to create the Sprite Atlas in the Xcode asset catalog.
+* type: Lets the generator now it's a sprite atlas.
+* assets: An array of ImageSets and/or image sequnces to generate inside the Sprite Atlas.
+
+### Level
+
+To be documented...
+
+### Group
+
+To be documented...
 
 ## Generate
 
