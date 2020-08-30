@@ -26,13 +26,9 @@ xc assetcat gen is available on [npm](https://www.npmjs.com/package/xc-assetcat-
 
 ### Installation 
 
+Install the tool per project in dedicated folder.
 
-
-Install the tool per project in dedicated folder with:
-
-```sh
-npm install xc-assetcat-gen --save
-```
+In the folder, create a `package.json` file with this content:
 
 ```json
 {
@@ -46,24 +42,49 @@ npm install xc-assetcat-gen --save
 }
 ```
 
+And then install the generator:
 
-
+```sh
+npm install
+```
 
 ## Config
 
+In the tool's installation folder, create a `config.js` file with this content:
+
+```
+const { Enums } = require("xc-assetcat-gen");
+
+// Enums
+const Idiom = Enums.Idiom;
+const Scale = Enums.Scale;
+const Type = Enums.Type;
+
+module.exports = {
+  // Root paths for input and output of assets
+  source_images_root: "/Path/To/Game/Source/Art",
+  asset_catalog_root: "/Path/To/Game/Asset/Catalog/Assets.xcassets",
+
+  // Author of asset catalog.
+  author: "com.bitbebop",
+
+  assets: [
+    // Array of assets... 
+  ]
+};
+```
+
+Then fill the `assets` array with the generation specification from the source art.
 
 
-9-1 (or what was the name?) slicing
+## Generate
 
-Run the script:
+The tool provides a dev mode to try the generation to an `output` folder in the tools installation folder.
 
 ```
 # Builds the assets to a target folder for dev purposes.
 npm run dev
 
-# Builds the assets to the production folder in Xcode.
+# Builds the assets to the assets folder in Xcode.
 npm run prod
-
-# Check code styling.
-npm run check
 ```
