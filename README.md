@@ -5,7 +5,7 @@
 ![Swift Gamedev](https://img.shields.io/badge/swift-gamedev-brightgreen.svg?style=flat)
 [![Twitter: @artstorm](https://img.shields.io/badge/twitter-@artstorm-blue.svg?style=flat)](https://twitter.com/artstorm)
 
-> **Note:** This repository contains the core code of the xcode asset catalog generator framework. If you want to use the generator in a project, visit the main [Xcode Asset Catalog Generator repository](https://github.com/artstorm/xcode-asset-catalog-generator).
+> **Note:** This repository contains the core code of the xcode asset catalog generator framework. If you want to use the generator in a game project, visit the main [Xcode Asset Catalog Generator repository](https://github.com/artstorm/xcode-asset-catalog-generator).
 
 xc assetcat gen is a batch processing framework that builds the asset catalog from source assets and generates images with optimized sizes for iPad, iPhone, AppleTV and Mac.
 
