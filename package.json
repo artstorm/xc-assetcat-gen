@@ -1,6 +1,6 @@
 {
   "name": "xc-assetcat-gen",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Xcode asset catalog generator for game development.",
   "main": "index.js",
   "scripts": {
